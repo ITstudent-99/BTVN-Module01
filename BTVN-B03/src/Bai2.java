@@ -12,8 +12,9 @@ public class Bai2 {
             number = scanner.nextInt();
         } while (number <= 0);
 
+        int digit;
         while (number > 0) {
-            int digit = number % 10;
+            digit = number % 10;
             reversed = reversed * 10 + digit;
             number /= 10;
         }

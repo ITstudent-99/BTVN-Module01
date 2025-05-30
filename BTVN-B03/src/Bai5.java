@@ -14,9 +14,9 @@ public class Bai5 {
             }
         } while (n < 0);
 
-
+        int soDu;
         while (n > 0){
-            int soDu = n % 2;
+            soDu = n % 2;
             soNhiPhan = soDu + soNhiPhan;
             n = n / 2;
         }
