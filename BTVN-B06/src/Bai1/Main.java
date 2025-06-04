@@ -75,5 +75,16 @@ public class Main {
 //                ((Bird) animal).fly();
 //            }
 //        }
+
+        // Bai 2
+        ZooAdvanced zooAdvanced = new ZooAdvanced();
+
+        zooAdvanced.inputAnimals();
+        zooAdvanced.displayAllInfo();
+
+        System.out.println("Danh sách động vật sau khi thêm và sắp xếp theo tuổi:");
+        zooAdvanced.displayAllInfo();
+
+        zooAdvanced.makeAllSound();
     }
 }

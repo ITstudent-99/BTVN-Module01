@@ -267,4 +267,21 @@ class ZooAdvanced extends Zoo {
             System.out.println("Đã thêm thành công!\n");
         }
     }
+
+    public void sortAnimalsByAge() {
+        ArrayList<Animal> animals = this.getAnimals();
+        int n = animals.size();
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (animals.get(j).getAge() > animals.get(j + 1).getAge()) {
+                    // Hoán đổi vị trí
+                    Animal temp = animals.get(j);
+                    animals.set(j, animals.get(j + 1));
+                    animals.set(j + 1, temp);
+                }
+            }
+        }
+    }
+
 }
