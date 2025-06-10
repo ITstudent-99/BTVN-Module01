@@ -190,7 +190,7 @@ WHERE email LIKE '%gmail.com%'
 
 
 -- o	Sử dụng toán tử AND/OR để tìm sinh viên có điểm trung bình lớn hơn 6.5 và có ít nhất một môn thi điểm dưới 5.0.
-SELECT DISTINCT SV.*
+SELECT DISTINCT SV.ho_ten
 FROM SinhVien SV
 JOIN DiemThi DT ON SV.id = DT.id_sinhvien
 WHERE SV.diem_trung_binh > 6.5
@@ -222,3 +222,52 @@ WHERE
     DT.diem < 5.0
 GROUP BY 
     MH.ten_mon;
+
+-- Extra
+-- Subquery (truy vấn con) là một câu lệnh SELECT nằm bên trong một câu lệnh khác (SELECT, INSERT, UPDATE, DELETE), thường nằm trong:
+-- WHERE
+-- FROM
+-- SELECT
+-- HAVING
+
+-- Ví dụ 1: Subquery trong WHERE
+-- Lấy danh sách sinh viên có điểm trung bình cao nhất.
+SELECT *
+FROM SinhVien
+WHERE diem_trung_binh = (
+    SELECT MAX(diem_trung_binh)
+    FROM SinhVien
+);
+
+-- Ví dụ 2: Subquery trong FROM
+-- Tính số lượng sinh viên có điểm thi dưới 5.0 từ một bảng phụ.
+SELECT COUNT(*) AS so_luong_thi_lai
+FROM (
+    SELECT id_sinhvien
+    FROM DiemThi
+    WHERE diem < 5.0
+    GROUP BY id_sinhvien
+) AS temp;
+
+-- Ví dụ 3: Subquery trong SELECT
+-- Hiển thị từng sinh viên cùng với điểm cao nhất họ từng đạt.
+SELECT 
+    SV.ho_ten,
+    (SELECT MAX(diem)
+     FROM DiemThi DT
+     WHERE DT.id_sinhvien = SV.id) AS diem_cao_nhat
+FROM SinhVien SV;
+
+-- Ví dụ 4: Subquery dùng với IN
+-- Lấy danh sách sinh viên đã thi môn “Cơ Sở Dữ Liệu”.
+SELECT *
+FROM SinhVien
+WHERE id IN (
+    SELECT id_sinhvien
+    FROM DiemThi
+    WHERE id_mon = (
+        SELECT id_mon
+        FROM MonHoc
+        WHERE ten_mon = 'Cơ Sở Dữ Liệu'
+    )
+);
