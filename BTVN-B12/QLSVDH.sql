@@ -150,11 +150,10 @@ SELECT * FROM DiemThi;
 INSERT INTO DiemThi (id_sinhvien, id_mon, diem) VALUES
 (6, 1, 3.5);
 
-SELECT mh.ten_mon
-FROM MonHoc as mh
-JOIN DiemThi as dt
-ON mh.id_mon = dt.id_mon
-WHERE dt.diem < 5;
+SELECT DISTINCT MH.ten_mon
+FROM DiemThi DT
+JOIN MonHoc MH ON DT.id_mon = MH.id_mon
+WHERE DT.diem < 5.0;
 
 -- o	Đếm số lượng sinh viên có điểm thi môn học trên 6.0.
 -- C1
